@@ -1,6 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { Alert } from 'react-native';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -40,26 +38,13 @@ export function Home() {
   }
 
   function handleFilterLoginData() {
-    if(searchText === ""){
-      showAlert();
-    } else {
-      const result = data.filter(data => (data.service_name === searchText));
-      console.log(searchText);
-      console.log(result);
-      setSearchListData(result); 
-    }
+    const data = searchListData.filter(searchText);
   } 
 
   function handleChangeInputText(text: string) {
     setSearchText(text);
   }
 
-  function showAlert() {
-    Alert.alert(
-      "Aviso",
-      "O CAMPO DE BUSCA NÀO PODE ESTAR VAZIO"
-    )
-  }
   useFocusEffect(useCallback(() => {
     loadData();
   }, []));
